@@ -25,10 +25,6 @@ async function build_uniswap_V3_USD_volume_and_transaction_object(hour) {
     if (Object.keys(V3_transactions_HourlyObject).length) {
       for (const pair of V3_transactions_HourlyObject.poolHourDatas) {
         const pairObject = pair.pool;
-        // const [reserve0, reserve1] =
-        //   calculate_reserve_tokens_for_uniswap_V3(pairObject);
-        // pairObject.reserve0 = reserve0;
-        // pairObject.reserve1 = reserve1;
         pairObject.token0['price'] = pairObject.token0Price;
         pairObject.token1['price'] = pairObject.token1Price;
         pairObject['exchange'] = 'uniswapV3';
@@ -42,10 +38,6 @@ async function build_uniswap_V3_USD_volume_and_transaction_object(hour) {
     if (Object.keys(V3_USD_volume_HourlyObject).length) {
       for (const pair of V3_USD_volume_HourlyObject.poolHourDatas) {
         const pairObject = pair.pool;
-        // const [reserve0, reserve1] =
-        //   calculate_reserve_tokens_for_uniswap_V3(pairObject);
-        // pairObject.reserve0 = reserve0;
-        // pairObject.reserve1 = reserve1;
         pairObject.token0['price'] = pairObject.token0Price;
         pairObject.token1['price'] = pairObject.token1Price;
         pairObject['exchange'] = 'uniswapV3';
