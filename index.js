@@ -20,7 +20,7 @@ async function init() {
       const possible_profitable_paths = produce_simple_exchange_paths(
         defi_array_of_objects
       );
-      console.log(possible_profitable_paths);
+      console.log(possible_profitable_paths[0]);
     }
   } catch (error) {
     console.error(error);

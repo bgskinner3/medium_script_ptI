@@ -23,7 +23,7 @@ async function get_all_defi_liquidty_pools(time) {
     const sushiswap = await build_sushiswap_USD_volume_and_transaction_object(
       time
     );
-    console.log(sushiswap);
+   
     if(uniswap_v3 && uniswap_v2 && sushiswap) {
       return [...uniswap_v3, ...uniswap_v2, ...sushiswap];
     }
