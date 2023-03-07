@@ -80,7 +80,89 @@ function get_uniswap_volume_by_the_hour_V3({ setHours: time }) {
   return queryObj;
 }
 
+function get_most_profitable_loan_pools_for_path_V3({
+  tokenID: tokenID,
+  poolAddress1: poolAddress1,
+  poolAddress2: poolAddress2,
+  poolAddress3: poolAddress3,
+}) {
+  const queryStr = `{
+    token(id: "${tokenID}"){
+    whitelistPools(first: 1, orderBy: liquidity, orderDirection: asc, where: {liquidity_gt: "0", tick_gt: 0, id_not_in: ["${poolAddress1}", "${poolAddress2}", "${poolAddress3}"], feeTier_lte: "3000"}){
+      token0{
+        symbol
+        decimals
+        id
+        derivedETH
+      }
+      token0Price
+      token1Price
+      token1{
+        symbol
+        decimals
+        id
+        derivedETH
+      }
+      feeTier
+      liquidity
+      tick
+      sqrtPrice
+      id
+    }
+  }
+  }`;
+  const queryObj = {
+    query: queryStr,
+  };
+  return queryObj;
+}
+function get_uniswap_last_swap_information_V3(address) {
+  const queryStr = `
+  {
+    swaps(first: 1, orderBy: timestamp, orderDirection: desc, where: {pool: "${address}"}){
+      sqrtPriceX96
+      amountUSD
+      timestamp
+      id
+      amount0
+      amount1
+      pool {
+        token0{
+          symbol
+          decimals
+          id
+          derivedETH
+        }
+        token0Price
+        token1Price
+        token1 {
+          symbol
+          decimals
+          id
+          derivedETH
+        }
+        feeTier
+        liquidity
+        tick
+        sqrtPrice
+        id
+      }
+    }
+  }`;
+  const queryObj = {
+    query: queryStr,
+  };
+  return queryObj;
+}
+
+
+
+
+
+
 module.exports = {
   get_uniswap_volume_by_the_hour_V3,
   get_uniswap_transactions_by_the_hour_V3,
+  get_most_profitable_loan_pools_for_path_V3,
+  get_uniswap_last_swap_information_V3,
 };

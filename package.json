@@ -1,6 +1,27 @@
 {
   "dependencies": {
+    "@uniswap/v3-periphery": "^1.4.3",
     "axios": "^1.3.3",
-    "ethers": "^6.0.5"
-  }
+    "decimal.js": "^10.4.3",
+    "ethers": "^5.7.1",
+    "invariant": "^2.2.4",
+    "jsbi": "^4.3.0"
+  },
+  "name": "medium_mapping_arbitrage",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bgskinner3/medium_script_ptI.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bgskinner3/medium_script_ptI/issues"
+  },
+  "homepage": "https://github.com/bgskinner3/medium_script_ptI#readme",
+  "description": ""
 }

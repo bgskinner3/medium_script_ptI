@@ -76,7 +76,83 @@ function get_uniswap_usd_volume_by_the_hour_V2({ setHours: time }) {
   return queryObj;
 }
 
+function get_uniswap_last_swap_information_V2(address) {
+  const queryStr = `
+  {
+    {
+    swaps(first: 1, orderBy: timestamp, orderDirection: desc, where: { pair: "${address}" } ) {
+      pair {
+        token0 {
+          symbol
+          id
+          decimals
+        }
+        token1 {
+          symbol
+          id
+          decimals
+        }
+        token0Price
+        token1Price
+        reserve0
+        reserve1
+        id
+      }
+      amount0In
+      amount0Out
+      amount1In
+      amount1Out
+      amountUSD
+      to
+      timestamp
+    }
+  }
+}
+ `;
+  const queryObj = {
+    query: queryStr,
+  };
+  return queryObj;
+}
+function get_most_profitable_loan_pools_for_path_V2({
+  tokenID: tokenID,
+  poolAddress: poolAddress,
+  poolAddress2: poolAddress2,
+  poolAddress3: poolAddress3,
+  token_number: token_number,
+}) {
+  const queryStr = `{
+    pairs(first: 1, orderBy: reserveUSD, orderDirection: desc, where :{${token_number}:"${tokenID}", id_not_in: ["${poolAddress}", "${poolAddress2}", "${poolAddress3}"], reserveUSD_gt: 0}) { 
+    id
+    reserve0
+    reserve1
+    reserveUSD
+    token0Price
+    token1Price
+    token0{
+      symbol
+      id
+      decimals
+      derivedETH
+    }
+    token1 {
+      symbol
+      id
+      decimals
+      derivedETH
+    }
+  }
+  }`;
+
+  const queryObj = {
+    query: queryStr,
+  };
+  return queryObj;
+}
+
 module.exports = {
   get_uniswap_usd_volume_by_the_hour_V2,
   get_uniswap_transactions_volume_by_the_hour_V2,
+  get_most_profitable_loan_pools_for_path_V2,
+  get_uniswap_last_swap_information_V2,
 };

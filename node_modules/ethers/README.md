@@ -2,73 +2,57 @@ The Ethers Project
 ==================
 
 [![npm (tag)](https://img.shields.io/npm/v/ethers)](https://www.npmjs.com/package/ethers)
-[![CI Tests](https://github.com/ethers-io/ethers.js/actions/workflows/test-ci.yml/badge.svg?branch=main)](https://github.com/ethers-io/ethers.js/actions/workflows/test-ci.yml)
-![npm bundle size (version)](https://img.shields.io/bundlephobia/minzip/ethers)
-![npm (downloads)](https://img.shields.io/npm/dm/ethers)
-[![GitPOAP Badge](https://public-api.gitpoap.io/v1/repo/ethers-io/ethers.js/badge)](https://www.gitpoap.io/gh/ethers-io/ethers.js)
-[![Twitter Follow](https://img.shields.io/twitter/follow/ricmoo?style=social)](https://twitter.com/ricmoo)
+[![Node.js CI](https://github.com/ethers-io/ethers.js/workflows/Node.js%20CI/badge.svg?branch=ethers-v5-beta)](https://github.com/ethers-io/ethers.js/actions?query=workflow%3A%22Node.js+CI%22)
 
------
+A complete Ethereum wallet implementation and utilities in JavaScript (and TypeScript).
 
-A complete, compact and simple library for Ethereum and ilk, written
-in [TypeScript](https://www.typescriptlang.org).
-
-**Features**
+**Features:**
 
 - Keep your private keys in your client, **safe** and sound
 - Import and export **JSON wallets** (Geth, Parity and crowdsale)
 - Import and export BIP 39 **mnemonic phrases** (12 word backup phrases) and **HD Wallets** (English as well as Czech, French, Italian, Japanese, Korean, Simplified Chinese, Spanish, Traditional Chinese)
 - Meta-classes create JavaScript objects from any contract ABI, including **ABIv2** and **Human-Readable ABI**
-- Connect to Ethereum nodes over [JSON-RPC](https://github.com/ethereum/wiki/wiki/JSON-RPC), [INFURA](https://infura.io), [Etherscan](https://etherscan.io), [Alchemy](https://alchemyapi.io), [Ankr](https://ankr.com) or [MetaMask](https://metamask.io)
+- Connect to Ethereum nodes over [JSON-RPC](https://github.com/ethereum/wiki/wiki/JSON-RPC), [INFURA](https://infura.io), [Etherscan](https://etherscan.io), [Alchemy](https://alchemyapi.io) or [MetaMask](https://metamask.io)
 - **ENS names** are first-class citizens; they can be used anywhere an Ethereum addresses can be used
-- **Tiny** (~120kb compressed; 400kb uncompressed)
-- **Tree-shaking** focused; include only what you need during bundling
+- **Tiny** (~104kb compressed; 322kb uncompressed)
+- **Modular** packages; include only what you need
 - **Complete** functionality for all your Ethereum desires
-- Extensive [documentation](https://docs.ethers.org/v6/)
+- Extensive [documentation](https://docs.ethers.io/v5/)
 - Large collection of **test cases** which are maintained and added to
-- Fully written in **TypeScript**, with strict types for security
+- Fully **TypeScript** ready, with definition files and full TypeScript source
 - **MIT License** (including ALL dependencies); completely open source to do with as you please
 
 
 Keep Updated
 ------------
 
-For the latest news and advisories, please follow the
-[@ethersproject](https://twitter.com/ethersproject) on Twitter (low-traffic,
-non-marketing, important information only) as well as watch this GitHub project.
+For the latest news and advisories, please follow the [@ethersproject](https://twitter.com/ethersproject)
+on Twitter (low-traffic, non-marketing, important information only) as well as watch this GitHub project.
 
-For the latest changes, see the
-[CHANGELOG](https://github.com/ethers-io/ethers.js/blob/main/CHANGELOG.md).
-
-**Summaries**
-
-- [September 2022](https://blog.ricmoo.com/highlights-ethers-js-september-2022-d7bda0fc37ed)
-- [June 2022](https://blog.ricmoo.com/highlights-ethers-js-june-2022-f5328932e35d)
-- [March 2022](https://blog.ricmoo.com/highlights-ethers-js-march-2022-f511fe1e88a1)
-- [December 2021](https://blog.ricmoo.com/highlights-ethers-js-december-2021-dc1adb779d1a)
-- [September 2021](https://blog.ricmoo.com/highlights-ethers-js-september-2021-1bf7cb47d348)
-- [May 2021](https://blog.ricmoo.com/highlights-ethers-js-may-2021-2826e858277d)
-- [March 2021](https://blog.ricmoo.com/highlights-ethers-js-march-2021-173d3a545b8d)
-- [December 2020](https://blog.ricmoo.com/highlights-ethers-js-december-2020-2e2db8bc800a)
-
+For the latest changes, see the [CHANGELOG](https://github.com/ethers-io/ethers.js/blob/master/CHANGELOG.md).
 
 
 Installing
 ----------
 
-**NodeJS**
+**node.js**
 
 ```
-/home/ricmoo/some_project> npm install ethers
+/home/ricmoo/some_project> npm install --save ethers
 ```
 
-**Browser (ESM)**
+**browser (UMD)**
 
-The bundled library is available in the `./dist/` folder in this repo.
+```
+<script src="https://cdn.ethers.io/lib/ethers-5.0.umd.min.js" type="text/javascript">
+</script>
+```
+
+**browser (ESM)**
 
 ```
 <script type="module">
-    import { ethers } from "./dist/ethers.min.js";
+    import { ethers } from "https://cdn.ethers.io/lib/ethers-5.0.umd.min.js";
 </script>
 ```
 
@@ -76,52 +60,41 @@ The bundled library is available in the `./dist/` folder in this repo.
 Documentation
 -------------
 
-Browse the [documentation](https://docs.ethers.org) online:
+Browse the [documentation](https://docs.ethers.io/v5/) online:
 
-- [Getting Started](https://docs.ethers.org/v6/getting-started/)
-- [Full API Documentation](https://docs.ethers.org/v6/api/)
+- [Getting Started](https://docs.ethers.io/v5/getting-started/)
+- [Full API Documentation](https://docs.ethers.io/v5/api/)
 - [Various Ethereum Articles](https://blog.ricmoo.com/)
 
+Or browse the entire documentation as a [single page](https://docs.ethers.io/v5/single-page/) to make searching easier.
 
 
-Providers
----------
-
-Ethers works closely with an ever-growing list of third-party providers
-to ensure getting started is quick and easy, by providing default keys
-to each service.
-
-These built-in keys mean you can use `ethers.getDefaultProvider()` and
-start developing right away.
-
-However, the API keys provided to ethers are also shared and are
-intentionally throttled to encourage developers to eventually get
-their own keys, which unlock many other features, such as faster
-responses, more capacity, analytics and other features like archival
-data.
-
-When you are ready to sign up and start using for your own keys, please
-check out the [Provider API Keys](https://docs.ethers.org/v5/api-keys/) in
-the documentation.
-
-A special thanks to these services for providing community resources:
-
-- [Ankr](https://www.ankr.com/)
-- [QuickNode](https://www.quicknode.com/)
-- [Etherscan](https://etherscan.io/)
-- [INFURA](https://infura.io/)
-- [Alchemy](https://dashboard.alchemyapi.io/signup?referral=55a35117-028e-4b7c-9e47-e275ad0acc6d)
-- [Pocket](https://pokt.network/pocket-gateway-ethereum-mainnet/)
-
-
-Extension Packages
+Ancillary Packages
 ------------------
 
-The `ethers` package only includes the most common and most core
-functionality to interact with Ethereum. There are many other
-packages designed to further enhance the functionality and experience.
+These are a number of packages not included in the umbrella `ethers` npm package, and
+additional packages are always being added. Often these packages are for specific
+use-cases, so rather than adding them to the umbrella package, they are added as
+ancillary packages, which can be included by those who need them, while not bloating
+everyone else with packages they do not need.
 
-- Hardware Wallets (@TODO)
+We will keep a list of useful packages here.
+
+- `@ethersproject/experimental` ([documentation](https://docs.ethers.io))
+- `@ethersproject/cli` ([documentation](https://docs.ethers.io))
+- `@ethersproject/hardware-wallets` ([documentation](https://docs.ethers.io))
+
+
+Sponsors
+--------
+
+Support the ethers project by [becoming a sponsor](https://ethers.org/sponsoring.html).
+Get your logo added below with a link to your website (Gold and Unobtainium tiers)
+and on the [ethers.org](https://ethers.org) website.
+
+Huge thanks to our sponsors! `<3 <3`
+
+<a href="https://ethers.org/sponsors/tally-link" target="_blank"><img src="https://ethers.org/sponsors/tally-readme.svg"></a>
 
 
 License

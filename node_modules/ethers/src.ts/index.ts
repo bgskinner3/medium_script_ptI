@@ -1,12 +1,80 @@
-/**
- *  The Application Programming Interface (API) is the collection of
- *  functions, classes and types offered by the Ethers library.
- *
- *  @_section: api:Application Programming Interface  [about-api]
- *  @_navTitle: API
- */
-import * as ethers from "./ethers.js";
+"use strict";
+
+// To modify this file, you must update ./misc/admin/lib/cmds/update-exports.js
+
+import * as ethers from "./ethers";
+
+try {
+    const anyGlobal = (window as any);
+
+    if (anyGlobal._ethers == null) {
+        anyGlobal._ethers = ethers;
+    }
+} catch (error) { }
 
 export { ethers };
 
-export * from "./ethers.js";
+export {
+    Signer,
+
+    Wallet,
+    VoidSigner,
+
+    getDefaultProvider,
+    providers,
+
+    BaseContract,
+    Contract,
+    ContractFactory,
+
+    BigNumber,
+    FixedNumber,
+
+    constants,
+    errors,
+
+    logger,
+
+    utils,
+
+    wordlists,
+
+
+    ////////////////////////
+    // Compile-Time Constants
+
+    version,
+
+
+    ////////////////////////
+    // Types
+
+    ContractFunction,
+    ContractReceipt,
+    ContractTransaction,
+    Event,
+    EventFilter,
+
+    Overrides,
+    PayableOverrides,
+    CallOverrides,
+
+    PopulatedTransaction,
+
+    ContractInterface,
+
+    TypedDataDomain,
+    TypedDataField,
+
+    BigNumberish,
+
+    Bytes,
+    BytesLike,
+
+    Signature,
+
+    Transaction,
+    UnsignedTransaction,
+
+    Wordlist
+} from "./ethers";

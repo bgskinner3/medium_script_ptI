@@ -51,7 +51,7 @@ function get_multiple_objects_for_mapping(
       ? poolAddresses[key2].add(`${pair.id}`)
       : (poolAddresses[key2] = new Set([`${pair.id}`]));
 
-    pair.token_ids = [pair.token0.id, pair.token1.id];
+   
     poolInfo[pair.id] = pair;
   }
 
@@ -430,8 +430,6 @@ function get_all_address_permutations(
   return result;
 }
 
-
-
 function build_base_to_quote_keys(cycle, poolAddress) {
   const [first_token_id, second_token_id, third_token_id] = cycle;
   const first_pool_key = `${first_token_id}-${second_token_id}`;
@@ -449,11 +447,11 @@ function build_base_to_quote_keys(cycle, poolAddress) {
   return all_paths_from_cycle;
 }
 
+
+
 function formatted_path_information(path, poolInfo) {
- 
-  const { keys } = path;
+  const { keys, token_ids } = path;
   const path_information_ordered = [];
- 
 
   for (const addresses of keys) {
     const [pool_id_1, pool_id_2, pool_id_3] = addresses;
@@ -464,16 +462,18 @@ function formatted_path_information(path, poolInfo) {
 
     const swap_3 = poolInfo[pool_id_3];
 
-    path_information_ordered.push(
-      ...[swap_1, swap_2, swap_3]
-    )
-     
+    const formatted = {
+      path: [swap_1, swap_2, swap_3],
+      token_ids: token_ids,
+      pool_addresses: [swap_1.id, swap_2.id, swap_3.id],
+    };
+
+    path_information_ordered.push(formatted);
   }
   return path_information_ordered;
 }
 
 function produce_simple_exchange_paths(exchangeObject) {
-
   const path_keys_and_ids = [];
   const simple_paths = [];
 
@@ -489,14 +489,72 @@ function produce_simple_exchange_paths(exchangeObject) {
     path_keys_and_ids.push({ keys: keys, token_ids: cycle });
   }
 
-  for (const path of path_keys_and_ids){
-    const path_with_liqudity_pool_info = formatted_path_information(path, poolInfo)
+  for (const path of path_keys_and_ids) {
+    const path_with_liqudity_pool_info = formatted_path_information(
+      path,
+      poolInfo
+    );
     simple_paths.push(...path_with_liqudity_pool_info);
-  } 
-  
+  }
+
   return simple_paths;
 }
 
 module.exports = {
   produce_simple_exchange_paths,
 };
+
+/**
+ * function formatted_path_information(path, poolInfo) {
+  const { keys, token_ids } = path;
+  const path_information_ordered = [];
+
+  for (const addresses of keys) {
+    const [pool_id_1, pool_id_2, pool_id_3] = addresses;
+
+    const swap_1 = poolInfo[pool_id_1];
+
+    const swap_2 = poolInfo[pool_id_2];
+
+    const swap_3 = poolInfo[pool_id_3];
+
+
+    const formatted = {
+      path: [swap_1, swap_2, swap_3],
+      token_ids: token_ids,
+      pool_addresses: [swap_1.id, swap_2.id, swap_3.id],
+    };
+
+    path_information_ordered.push(formatted)
+
+  }
+  return path_information_ordered;
+}
+
+function produce_simple_exchange_paths(exchangeObject) {
+  const path_keys_and_ids = [];
+  const simple_paths = [];
+
+  const [pairUUID, poolAddresses, poolInfo] =
+    get_multiple_objects_for_mapping(exchangeObject);
+  const { graph, poolAddress } = build_adjacency_list(poolAddresses, pairUUID);
+  const tree = get_tree(graph);
+  const cycles = get_all_cycles(graph, tree);
+
+  for (const cycle of cycles) {
+    const keys = build_base_to_quote_keys(cycle, poolAddress);
+
+    path_keys_and_ids.push({ keys: keys, token_ids: cycle });
+  }
+
+  for (const path of path_keys_and_ids) {
+    const path_with_liqudity_pool_info = formatted_path_information(
+      path,
+      poolInfo
+    );
+    simple_paths.push(...path_with_liqudity_pool_info);
+  }
+
+  return simple_paths;
+}
+ */
